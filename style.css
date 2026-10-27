@@ -1,0 +1,430 @@
+/* ========================================
+   CONVITE JOEL — OPÇÃO 2: POSTAL AÉREO
+   Direção editorial, vertical e mobile first.
+   ======================================== */
+
+:root {
+  /* Primitivas: céu, papel, sálvia e pêssego da identidade do Joel. */
+  --sky-900: oklch(37% 0.065 225);
+  --sky-700: oklch(49% 0.075 225);
+  --sky-400: oklch(76% 0.07 225);
+  --sky-200: oklch(90% 0.045 225);
+  --sage-800: oklch(39% 0.07 157);
+  --sage-600: oklch(54% 0.08 157);
+  --sage-200: oklch(90% 0.04 157);
+  --peach-300: oklch(85% 0.07 65);
+  --paper-100: oklch(98% 0.018 85);
+  --paper-200: oklch(95% 0.035 85);
+  --brown-800: oklch(38% 0.075 55);
+
+  /* Tokens semânticos. */
+  --page: var(--sky-900);
+  --surface: var(--paper-100);
+  --ink: var(--sky-900);
+  --accent: var(--sage-800);
+  --line: var(--sky-400);
+  --focus: var(--peach-300);
+
+  /* Tokens de componente. */
+  --font-display: "Lobster", cursive;
+  --font-body: "Nunito", sans-serif;
+  --shadow-paper: 0 1.5rem 3rem oklch(30% 0.06 225 / 0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, summary, a { -webkit-tap-highlight-color: transparent; }
+button, a, summary { touch-action: manipulation; }
+button { font: inherit; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+p, h1, h2, h3, figure, dl, dd { margin: 0; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+
+.postal-shell {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin-inline: auto;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-paper);
+}
+
+/* ---------- Tela 1: postal ---------- */
+.cover {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--sky-200) url("assets/ceu-aquarela.png") center / cover no-repeat;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 220ms ease-out, visibility 220ms;
+}
+
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: oklch(96% 0.025 225 / 0.28);
+  pointer-events: none;
+}
+
+.cover__route {
+  position: absolute;
+  top: 8%;
+  left: -8%;
+  z-index: 1;
+  width: 116%;
+  height: 34%;
+  border: 2px dashed oklch(49% 0.075 225 / 0.55);
+  border-radius: 50%;
+  transform: rotate(-16deg);
+  pointer-events: none;
+}
+
+.cover__button {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: max(2rem, env(safe-area-inset-top)) 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+  border: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: transparent;
+  color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+}
+
+.postcard {
+  position: relative;
+  display: block;
+  width: min(88vw, 21rem);
+  aspect-ratio: 0.77;
+  overflow: hidden;
+  border: 0.55rem solid var(--paper-100);
+  background: var(--paper-200);
+  box-shadow: var(--shadow-paper);
+  text-align: left;
+  transform: rotate(2.5deg);
+  transition: transform 260ms ease-out, opacity 180ms ease-out;
+}
+
+.postcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid oklch(38% 0.075 55 / 0.18);
+  pointer-events: none;
+}
+
+.postcard__topline {
+  position: absolute;
+  top: 5%;
+  left: 6%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.55rem, 2.2vw, 0.7rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.postcard__topline i { display: block; width: 1.5rem; border-top: 1px solid currentColor; }
+
+.postcard__stamp {
+  position: absolute;
+  top: 12%;
+  right: 7%;
+  z-index: 2;
+  display: grid;
+  width: 22%;
+  aspect-ratio: 0.83;
+  place-content: center;
+  border: 0.3rem dotted var(--paper-100);
+  outline: 1px solid var(--sky-700);
+  background: var(--sky-400);
+  color: var(--ink);
+  text-align: center;
+  transform: rotate(4deg);
+}
+.postcard__stamp strong { font-family: var(--font-display); font-size: clamp(2rem, 10vw, 3rem); font-weight: 400; line-height: 0.9; }
+.postcard__stamp small { font-size: 0.65rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+
+.postcard__postmark {
+  position: absolute;
+  top: 15%;
+  right: 22%;
+  z-index: 3;
+  display: grid;
+  width: 29%;
+  aspect-ratio: 1;
+  place-content: center;
+  border: 2px solid oklch(37% 0.065 225 / 0.55);
+  border-radius: 50%;
+  color: oklch(37% 0.065 225 / 0.65);
+  font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-align: center;
+  transform: rotate(-14deg);
+}
+
+.postcard__art {
+  position: absolute;
+  top: 18%;
+  left: 1%;
+  width: 75%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: rotate(-3deg);
+}
+
+.postcard__address {
+  position: absolute;
+  right: 8%;
+  bottom: 10%;
+  left: 8%;
+  padding-top: 0.65rem;
+  color: var(--brown-800);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 5.4vw, 1.65rem);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.postcard__from {
+  position: absolute;
+  right: 0;
+  bottom: 4%;
+  left: 0;
+  font-size: clamp(0.6rem, 2.5vw, 0.75rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cover__title {
+  margin-top: clamp(1.25rem, 4vh, 2rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 6.8vw, 2rem);
+  line-height: 1.25;
+}
+
+.cover__hint { display: flex; min-height: 2.75rem; margin-top: 0.35rem; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 800; }
+.cover__hint svg { width: 1.25rem; animation: send-postcard 1.8s ease-in-out infinite; }
+
+/* ---------- Tela 2: editorial vertical ---------- */
+.invitation {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(2rem);
+  transition: opacity 240ms ease-out, transform 240ms ease-out, visibility 240ms;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sky-400) transparent;
+}
+
+.close-button {
+  position: fixed;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: max(0.75rem, calc((100vw - 30rem) / 2 + 0.75rem));
+  z-index: 20;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: oklch(98% 0.018 85 / 0.9);
+  color: var(--ink);
+  cursor: pointer;
+  backdrop-filter: blur(0.5rem);
+}
+.close-button svg { width: 1.25rem; }
+.close-button:hover { background: var(--sky-200); }
+.close-button:active { transform: scale(0.94); }
+
+.editorial-hero {
+  position: relative;
+  padding: max(1.25rem, env(safe-area-inset-top)) 1.5rem 2rem;
+  overflow: hidden;
+  background: var(--sky-200);
+}
+
+.editorial-hero::before {
+  content: "1";
+  position: absolute;
+  top: 4rem;
+  right: -0.5rem;
+  color: oklch(98% 0.018 85 / 0.6);
+  font-family: var(--font-display);
+  font-size: 18rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.edition-line { display: flex; padding-right: 3.25rem; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--ink); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.editorial-hero__overline { position: relative; margin-top: 2.25rem; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+
+.editorial-hero h1 { position: relative; margin-top: 0.5rem; font-weight: 400; line-height: 0.88; outline: none; }
+.editorial-hero h1 span { display: block; color: var(--accent); font-family: var(--font-display); font-size: clamp(4.5rem, 23vw, 6.5rem); }
+.editorial-hero h1 strong { display: block; margin-top: 0.75rem; font-size: clamp(2rem, 10vw, 3rem); font-weight: 900; letter-spacing: -0.05em; text-transform: uppercase; }
+.editorial-hero__intro { position: relative; max-width: 31ch; margin-top: 1.25rem; }
+
+.editorial-hero__art {
+  position: relative;
+  width: 91%;
+  margin: 2rem 0 0 auto;
+  padding: 0.6rem 0.6rem 0.85rem;
+  background: var(--paper-100);
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-2.5deg);
+}
+.editorial-hero__art img { width: 100%; aspect-ratio: 1.18; object-fit: cover; }
+.editorial-hero__art figcaption { padding-top: 0.6rem; color: var(--brown-800); font-size: 0.75rem; font-weight: 800; text-align: center; }
+.photo-tape { position: absolute; top: -0.8rem; left: 35%; z-index: 2; width: 30%; height: 1.8rem; background: oklch(85% 0.07 65 / 0.78); transform: rotate(3deg); }
+
+.journey { padding: 2rem 1.5rem; }
+.journey__heading p, .gift-guide__title > p { color: var(--accent); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+.journey__heading h2, .gift-guide__title h2 { margin-top: 0.2rem; font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; line-height: 1.2; }
+
+.journey__stops { position: relative; margin-top: 1.5rem; }
+.journey__stops::before { content: ""; position: absolute; top: 1rem; bottom: 1rem; left: 1rem; border-left: 2px dashed var(--line); }
+.journey__stop { position: relative; display: grid; grid-template-columns: 6.25rem 1fr; gap: 0.75rem; padding-block: 1rem; }
+.journey__stop dt { position: relative; display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; font-weight: 900; text-transform: uppercase; }
+.journey__stop dt span { z-index: 1; display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 50%; background: var(--accent); color: var(--paper-100); font-size: 0.65rem; }
+.journey__stop dd { font-weight: 800; overflow-wrap: anywhere; }
+.journey__stop dd strong { font-size: 0.875rem; font-weight: 600; }
+
+.map-link {
+  display: flex;
+  min-height: 3.75rem;
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--accent);
+  color: var(--paper-100);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: transform 160ms ease-out, background 160ms ease-out;
+}
+.map-link svg { width: 1.4rem; flex: 0 0 auto; }
+.map-link span { flex: 1; }
+.map-link:hover { background: var(--ink); }
+.map-link:active { transform: scale(0.98); }
+
+.captain-note { border-block: 1px solid var(--line); background: var(--paper-200); }
+.captain-note summary { display: flex; min-height: 5rem; padding: 1rem 1.5rem; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; }
+.captain-note summary::-webkit-details-marker { display: none; }
+.captain-note summary span { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; }
+.captain-note summary small { display: block; margin-bottom: 0.25rem; font-family: var(--font-body); font-size: 0.65rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.captain-note summary svg { width: 1.5rem; flex: 0 0 auto; transition: transform 180ms ease-out; }
+.captain-note[open] summary svg { transform: rotate(45deg); }
+.captain-note__message { padding: 0 1.5rem 1.5rem; }
+.captain-note__message p { max-width: 34ch; color: var(--brown-800); }
+.captain-note__message strong { display: block; margin-top: 0.75rem; color: var(--accent); font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; text-align: right; }
+
+/* ---------- Guia horizontal de presentes ---------- */
+.gift-guide { padding-block: 2rem; background: var(--sky-200); }
+.gift-guide__title { padding-inline: 1.5rem; }
+.gift-guide__title > span { display: block; margin-top: 0.5rem; font-size: 0.875rem; font-weight: 700; }
+.carousel { margin-top: 1.5rem; }
+
+.gift-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(82%, 18rem);
+  gap: 0.75rem;
+  padding: 0 1.5rem 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 1.5rem;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+.gift-track::-webkit-scrollbar { display: none; }
+
+.gift-card {
+  min-height: 20rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--paper-100);
+  scroll-snap-align: start;
+}
+.gift-card__meta { display: flex; padding-bottom: 0.65rem; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.gift-card > svg { width: 5.5rem; margin: 2rem 0; color: var(--accent); stroke-width: 1.3; }
+.gift-card h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 400; line-height: 1.2; }
+.gift-card p { margin-top: 0.6rem; font-size: 0.9375rem; }
+
+.carousel__footer { display: flex; min-height: 3.5rem; padding: 0 1.5rem; align-items: center; justify-content: space-between; gap: 1rem; }
+.carousel__dots { display: flex; align-items: center; gap: 0.25rem; }
+.carousel__dots button { width: 2.75rem; height: 2.75rem; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.carousel__dots button::before { content: ""; display: block; width: 0.45rem; height: 0.45rem; margin: auto; border-radius: 50%; background: var(--sky-700); transition: transform 180ms ease-out, background 180ms ease-out; }
+.carousel__dots button[aria-current="true"]::before { background: var(--accent); transform: scale(1.8); }
+.carousel__buttons { display: flex; gap: 0.5rem; }
+.carousel__buttons button { display: grid; width: 2.75rem; height: 2.75rem; padding: 0; place-items: center; border: 1px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.carousel__buttons button svg { width: 1.25rem; }
+.carousel__buttons button:hover:not(:disabled) { background: var(--paper-100); }
+.carousel__buttons button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.invitation__footer { position: relative; padding: 3rem 1.5rem max(2rem, env(safe-area-inset-bottom)); overflow: hidden; background: var(--accent); color: var(--paper-100); text-align: center; }
+.invitation__footer p { position: relative; font-family: var(--font-display); font-size: 2rem; line-height: 1.25; }
+.invitation__footer > span:last-child { position: relative; display: block; margin-top: 1rem; font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.footer-stamp { position: absolute; top: -3rem; right: -1rem; color: oklch(98% 0.018 85 / 0.09); font-family: var(--font-display); font-size: 13rem; line-height: 1; }
+
+/* Abertura: o postal “sai” da tela enquanto a edição é revelada. */
+.is-open .cover { opacity: 0; visibility: hidden; pointer-events: none; }
+.is-open .postcard { opacity: 0; transform: translateY(-16vh) rotate(-5deg) scale(1.05); }
+.is-open .invitation { opacity: 1; visibility: visible; transform: none; }
+
+@keyframes send-postcard {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(0.3rem); }
+}
+
+@media (min-width: 48rem) {
+  .postal-shell { margin-block: 1.5rem; min-height: calc(100dvh - 3rem); }
+  .cover__button, .invitation { min-height: calc(100dvh - 3rem); }
+  .close-button { position: absolute; right: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: 0.01ms !important; }
+}

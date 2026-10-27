@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b9dfea">
+  <meta name="description" content="Um postal interativo para o primeiro aniversário do Joel.">
+  <title>Joel faz 1 | Um postal para você</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-closed">
+  <main class="postal-shell">
+    <!-- TELA 1: cartão-postal fechado. -->
+    <section class="cover" aria-label="Postal fechado do convite">
+      <div class="cover__route" aria-hidden="true"></div>
+      <button class="cover__button" id="abrir-convite" type="button"
+              aria-controls="convite" aria-expanded="false">
+        <span class="postcard" aria-hidden="true">
+          <span class="postcard__topline">Correio aéreo <i></i> Edição especial</span>
+          <span class="postcard__stamp"><strong>1</strong><small>ano</small></span>
+          <span class="postcard__postmark">JOEL<br>2026</span>
+          <img class="postcard__art" src="assets/balao-e-aviao.png" alt="" width="708" height="708">
+          <span class="postcard__address">Para: nossos amigos<br>e familiares queridos</span>
+          <span class="postcard__from">Com carinho, Família do Joel</span>
+        </span>
+        <span class="cover__title">Toque para abrir o convite<br>de 1 aninho do Joel</span>
+        <span class="cover__hint">Despache este postal com um toque
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </button>
+    </section>
+
+    <!-- TELA 2: informações editáveis do convite. -->
+    <article class="invitation" id="convite" aria-hidden="true" inert>
+      <button class="close-button" id="fechar-convite" type="button" aria-label="Fechar convite e voltar ao postal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+
+      <header class="editorial-hero">
+        <div class="edition-line"><span>O tempo voa</span><span>Vol. 01</span></div>
+        <p class="editorial-hero__overline">O primeiro ano do nosso aviador</p>
+        <h1 id="titulo-convite" tabindex="-1"><span>Joel</span><strong>faz 1!</strong></h1>
+        <p class="editorial-hero__intro">Uma tarde para celebrar pequenas descobertas, grandes sorrisos e a alegria de ter você por perto.</p>
+
+        <figure class="editorial-hero__art">
+          <span class="photo-tape" aria-hidden="true"></span>
+          <img src="assets/joel-aviador.png" alt="Joel ilustrado como um pequeno aviador" width="496" height="400">
+          <figcaption>Capitão Joel · pronto para decolar</figcaption>
+        </figure>
+      </header>
+
+      <section class="journey" aria-labelledby="detalhes-titulo">
+        <div class="journey__heading">
+          <p>Próxima parada</p>
+          <h2 id="detalhes-titulo">A festa do Joel</h2>
+        </div>
+
+        <dl class="journey__stops">
+          <div class="journey__stop">
+            <dt><span>01</span>Quando</dt>
+            <dd>[DATA DA FESTA]<br><strong>[HORÁRIO]</strong></dd>
+          </div>
+          <div class="journey__stop">
+            <dt><span>02</span>Onde</dt>
+            <dd>[NOME DO LOCAL]<br><strong>[ENDEREÇO COMPLETO]</strong></dd>
+          </div>
+        </dl>
+
+        <!-- Substitua ENDERECO+DA+FESTA pelo endereço real. -->
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=ENDERECO+DA+FESTA" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Ver localização no Google Maps</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </section>
+
+      <details class="captain-note">
+        <summary>
+          <span><small>Toque para ler</small>Recado do capitão</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </summary>
+        <div class="captain-note__message">
+          <p>“De 0 a 1 ano, descobri que a melhor parte de qualquer viagem é ter quem a gente ama por perto. Vem comemorar comigo?”</p>
+          <strong>Joel</strong>
+        </div>
+      </details>
+
+      <section class="gift-guide" aria-labelledby="presentes-titulo">
+        <div class="gift-guide__title">
+          <p>Guia de bordo · 4 ideias</p>
+          <h2 id="presentes-titulo">Presentes para essa fase</h2>
+          <span>Deslize as sugestões para o lado</span>
+        </div>
+
+        <div class="carousel" data-carousel>
+          <div class="gift-track" tabindex="0" role="region" aria-label="Sugestões de presentes; deslize horizontalmente">
+            <article class="gift-card">
+              <div class="gift-card__meta"><span>Construir</span><strong>01</strong></div>
+              <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M18 38h44v28H18zM26 14h28v24H26z"/><path d="M18 48h44M40 14v24M12 66h56"/></svg>
+              <h3>Blocos de montar</h3><p>Para criar torres e derrubá-las com muita risada.</p>
+            </article>
+            <article class="gift-card">
+              <div class="gift-card__meta"><span>Descobrir</span><strong>02</strong></div>
+              <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M15 25c10-5 18-3 25 3 7-6 15-8 25-3v36c-10-5-18-3-25 3-7-6-15-8-25-3V25Z"/><path d="M40 28v36M22 36c5-1 9 0 12 2M46 38c4-2 8-3 13-2"/></svg>
+              <h3>Livrinhos infantis</h3><p>De páginas resistentes, ilustrações e pouco texto.</p>
+            </article>
+            <article class="gift-card">
+              <div class="gift-card__meta"><span>Explorar</span><strong>03</strong></div>
+              <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="25"/><path d="M40 15v50M15 40h50M24 24l32 32M56 24 24 56"/><circle cx="40" cy="40" r="9"/></svg>
+              <h3>Brinquedos de encaixe</h3><p>Formas, texturas e cores para mãos curiosas.</p>
+            </article>
+            <article class="gift-card">
+              <div class="gift-card__meta"><span>Movimentar</span><strong>04</strong></div>
+              <svg viewBox="0 0 80 80" aria-hidden="true"><path d="M18 30h35l10 18v10H18zM53 30V17h10M12 58h57"/><circle cx="27" cy="62" r="7"/><circle cx="54" cy="62" r="7"/></svg>
+              <h3>Carrinho de empurrar</h3><p>Para acompanhar as descobertas sobre duas perninhas.</p>
+            </article>
+          </div>
+
+          <div class="carousel__footer">
+            <div class="carousel__dots" aria-label="Escolher sugestão"></div>
+            <div class="carousel__buttons">
+              <button type="button" data-prev aria-label="Sugestão anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+              <button type="button" data-next aria-label="Próxima sugestão"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="invitation__footer">
+        <span class="footer-stamp" aria-hidden="true">1</span>
+        <p>Sua presença faz<br>o nosso coração voar.</p>
+        <span>Até lá! · Família do Joel</span>
+      </footer>
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
